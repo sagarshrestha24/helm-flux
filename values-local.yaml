@@ -1,0 +1,100 @@
+# Default values for fedco.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: feidapigeeplatformacr1.azurecr.io/fedco-devcentral-app
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 3000
+  name: fedco
+  
+
+labels: 
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+configMap:
+    name: local-configmap
+config: 
+     config: |2+
+        window.config = {
+        "REACT_APP_DEV_CENTRAL_APP_URL": "http://localhost:3000",
+        "REACT_APP_SPEC_VALIDATOR_URL": "http://3.218.141.44:9001",
+        "REACT_APP_SPEC_MNGR_URL": "http://3.218.141.44:9001",
+        "REACT_APP_PROXY_GEN_URL": "http://3.218.141.44:9001",
+        "REACT_APP_CONFIG_MNGR_URL": "http://3.218.141.44:9001",
+        "REACT_APP_EDGE_SECURED_API_URL": "https://amer-mint-partner01-test.apigee.net",
+        "REACT_APP_JENKINS_LOCATION_API": "http://107.23.248.181:8080",
+        "REACT_APP_AZURE_AD_URL": "https://login.microsoftonline.com",
+        "REACT_APP_AZURE_AD_TENANT_ID": "f2dd062d-3e19-44b1-aeef-11297fbec7e2",
+        "REACT_APP_AZURE_AD_APP_CLIENT_ID": "caa10914-2e2a-4dbf-9ddc-bdd5af07dab8",
+        "ENABLE_DEMO_LOGIN": true,
+        "local": true
+            }
