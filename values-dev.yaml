@@ -1,10 +1,10 @@
 replicaCount: 1
 
 image:
-  repository: feidapigeeplatformacr1.azurecr.io/fedco-devcentral-app
-  pullPolicy: Always
+  repository: sagark24/fedco-app
+  pullPolicy: IfNotPresent
   
-  tag: "latest"
+  tag: "1.1.0"
 
 deployment:
     name: devcentral-app
