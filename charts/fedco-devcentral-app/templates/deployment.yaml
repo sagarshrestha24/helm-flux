@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "devcentral.name" . }}
+  name: {{ .Chart.Name }}
   labels:
     {{- include "fedco-devcentral-app.labels" . | nindent 4 }}
 spec:
@@ -16,26 +16,11 @@ spec:
         {{- include "fedco-devcentral-app.labels" . | nindent 8 }}
     spec:
       containers:
-      - name: {{ template "devcentral.name" . }}
+      - name: {{ .Chart.Name }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         ports:
           - containerPort: {{ .Values.service.port }}
-        livenessProbe:
-            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
-            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
-            successThreshold: {{ .Values.livenessProbe.successThreshold }}
-            failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
-            tcpSocket:
-              port: {{ .Values.service.port }}
-        readinessProbe:
-            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
-            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
-            successThreshold: {{ .Values.readinessProbe.successThreshold }}
-            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
-            tcpSocket:
-              port: {{ .Values.service.port }}
+        
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         volumeMounts:
           - name: config-js-volume
