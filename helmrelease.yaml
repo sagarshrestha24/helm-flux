@@ -8,6 +8,6 @@ spec:
   chart:
     git: git@github.com:sagarshrestha24/helm-flux.git 
     ref: main
-    path: ./charts
+    path: ./charts/fedco-devcentral-app
 #  values:
 #    replicaCount: 1

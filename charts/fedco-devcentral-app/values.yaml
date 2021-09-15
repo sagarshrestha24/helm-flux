@@ -40,7 +40,8 @@ service:
   type: ClusterIP
   port: 3000
   name: fedco
-  
+
+deployment: fedco-devcentral-app 
 
 labels: 
 
