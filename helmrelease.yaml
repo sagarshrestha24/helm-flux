@@ -4,6 +4,8 @@ metadata:
   name: fedco-devcentral-app
   namespace: default 
 spec:
+  rollback:
+    enable: true
   releaseName: fedco-devcentral-app
   chart:
     git: git@github.com:sagarshrestha24/helm-flux.git 
