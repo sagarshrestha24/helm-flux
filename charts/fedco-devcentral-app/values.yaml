@@ -41,7 +41,8 @@ service:
   port: 3000
   name: fedco
 
-deployment: fedco-devcentral-app 
+deployment: 
+   name: fedco-devcentral-app 
 
 labels: 
 
