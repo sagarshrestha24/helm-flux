@@ -1,0 +1,13 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: fedco-devcentral-app
+  namespace: default 
+spec:
+  releaseName: fedco-devcentral-app
+  chart:
+    git: git@github.com:sagarshrestha24/helm-flux.git 
+    ref: main
+    path: ./charts
+#  values:
+#    replicaCount: 1
